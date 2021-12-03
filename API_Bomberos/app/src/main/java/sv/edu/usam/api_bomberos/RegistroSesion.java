@@ -34,7 +34,7 @@ public class RegistroSesion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_sesion);
 
-        nombre = findViewById(R.id.edtnombre);
+        nombre = findViewById(R.id.edtpassword);
         email = findViewById(R.id.edtmail);
         clave = findViewById(R.id.edtclave);
         telefono = findViewById(R.id.edtcel);
