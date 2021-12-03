@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), Inicio.class));
                         Toast.makeText(MainActivity.this, "Hola "+nombre, Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
 
                 }
