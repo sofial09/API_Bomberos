@@ -1,0 +1,15 @@
+/API_Bomberos/*.iml
+/API_Bomberos/.gradle
+/API_Bomberos/local.properties
+/API_Bomberos//.idea/caches
+/API_Bomberos//.idea/libraries
+/API_Bomberos//.idea/modules.xml
+/API_Bomberos//.idea/workspace.xml
+/API_Bomberos//.idea/navEditor.xml
+/API_Bomberos//.idea/assetWizardSettings.xml
+/API_Bomberos/.DS_Store
+/API_Bomberos//build
+/API_Bomberos//captures
+/API_Bomberos/.externalNativeBuild
+/API_Bomberos/.cxx
+/API_Bomberos/local.properties

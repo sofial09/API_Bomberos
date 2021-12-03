@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:background="@drawable/fondo"
+    android:gravity="center"
+    android:onClick="Login"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -72,6 +73,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#9c111d"
+                android:onClick="Login"
                 android:text="Iniciar Sesión"
                 android:textColor="@android:color/white"
                 android:textSize="15dp" />

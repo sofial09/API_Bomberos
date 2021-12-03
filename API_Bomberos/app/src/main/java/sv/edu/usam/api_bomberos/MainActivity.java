@@ -17,6 +17,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     EditText email, contraseña;
 
     String str_email,str_password;
-    String url = "http://login.corporacionefransac.com/login.php";
+    String url = "https://apibomberos.000webhostapp.com/datos/usuario.php";
+    //String url = "http://login.corporacionefransac.com/login.php";
     //String URL = "http://192.168.0.7/USAM_API/api/login.php";
 
     @Override
@@ -33,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        email = findViewById(R.id.etemail);
-        contraseña = findViewById(R.id.etcontraseña);
+        email = findViewById(R.id.edtnombre);
+        contraseña = findViewById(R.id.edtmail);
     }
 
     public void Login(View view) {
@@ -62,12 +66,25 @@ public class MainActivity extends AppCompatActivity {
                 public void onResponse(String response) {
                     progressDialog.dismiss();
 
-                    if (response.equalsIgnoreCase("ingresó correctamente")) {
 
+
+                    if (!response.equalsIgnoreCase("{\"mensaje\":\"error\"}")) {
+                        JSONObject respuestaObj = new JSONObject();
+                        try {
+                            respuestaObj = new JSONObject(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         email.setText("");
                         contraseña.setText("");
+                        String nombre = "";
+                        try {
+                            nombre = respuestaObj.getString("nombre");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         startActivity(new Intent(getApplicationContext(), Inicio.class));
-                        Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Hola "+nombre, Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
                     }
@@ -84,8 +101,9 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String,String> params = new HashMap<String, String>();
-                    params.put("email",str_email);
-                    params.put("password",str_password);
+                    params.put("correo",str_email);
+                    params.put("clave",str_password);
+                    params.put("accion","login");
                     return params;
                 }
             };
