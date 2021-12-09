@@ -20,7 +20,7 @@
 
     <ScrollView
         android:layout_width="370dp"
-        android:layout_height="500dp">
+        android:layout_height="379dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,7 +55,7 @@
             </RelativeLayout>
 
             <EditText
-                android:id="@+id/edtpassword"
+                android:id="@+id/edtnombre"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
@@ -70,7 +70,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/textcolor"
-                android:hint="Correo Electrónico"
+                android:hint="Correo electrónico"
                 android:inputType="textEmailAddress"
                 android:padding="10dp" />
 
@@ -80,7 +80,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/textcolor"
-                android:hint="Telefono"
+                android:hint="Teléfono"
                 android:inputType="phone"
                 android:padding="10dp" />
 
@@ -94,24 +94,13 @@
                 android:inputType="textPassword"
                 android:padding="10dp" />
 
-            <EditText
-                android:id="@+id/edttipo"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/textcolor"
-                android:ems="10"
-                android:hint="Tipo de Usuario"
-                android:inputType="textPersonName"
-                android:padding="10dp" />
-
             <Button
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#9c111d"
-                android:text="Registrarse"
+                android:text="Registrarme"
                 android:textColor="@android:color/white"
                 android:textSize="15dp" />
 

@@ -26,7 +26,7 @@ public class RegistroSesion extends AppCompatActivity {
     /*
     EditText txtName,txtEmail,pass;
     Button btn_insert;*/
-    EditText nombre,email, clave, telefono, tipo;
+    EditText nombre,email, clave, telefono;
     Button btn_insert;
 
     @Override
@@ -34,17 +34,15 @@ public class RegistroSesion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_sesion);
 
-        nombre = findViewById(R.id.edtpassword);
+        nombre = findViewById(R.id.edtnombre);
         email = findViewById(R.id.edtmail);
         clave = findViewById(R.id.edtclave);
         telefono = findViewById(R.id.edtcel);
-        tipo = findViewById(R.id.edttipo);
         btn_insert = findViewById(R.id.btn_register);
 
         btn_insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 insertData();
             }
         });
@@ -56,7 +54,7 @@ public class RegistroSesion extends AppCompatActivity {
         final String mail = email.getText().toString().trim();
         final String pass = clave.getText().toString().trim();
         final String tel = telefono.getText().toString().trim();
-        final String type = tipo.getText().toString().trim();
+        final String type = "2";
 
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -81,12 +79,6 @@ public class RegistroSesion extends AppCompatActivity {
             telefono.setError("complete los campos");
             return;
         }
-
-        else if(type.isEmpty()){
-            tipo.setError("complete los campos");
-            return;
-        }
-
 
         else{
             progressDialog.show();
@@ -129,10 +121,10 @@ public class RegistroSesion extends AppCompatActivity {
                     params.put("clave", pass);
                     params.put("telefono", tel);
                     params.put("tipo", type);
-/*
-https://apibomberos.000webhostapp.com/datos/
-https://apibomberos.000webhostapp.com/datos/usuario.php?accion=login&correo=alvaro@alvaro.com&clave=1234
-     */
+                    /*
+                        https://apibomberos.000webhostapp.com/datos/
+                        https://apibomberos.000webhostapp.com/datos/usuario.php?accion=login&correo=alvaro@alvaro.com&clave=1234
+                    */
                     return params;
                 }
             };
