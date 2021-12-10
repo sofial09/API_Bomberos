@@ -9,14 +9,13 @@
     android:background="@drawable/fondo"
     tools:context=".RegistroSesion">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/fire"
-        app:civ_border_color="#9c111d"
-        app:civ_border_width="2dp" />
+        app:srcCompat="@drawable/logo_bomberos" />
 
     <ScrollView
         android:layout_width="370dp"
@@ -36,8 +35,8 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Registrate"
-                    android:textColor="#9c111d"
+                    android:text="Regístrate"
+                    android:textColor="#ffffff"
                     android:textSize="28sp"
                     android:textStyle="bold" />
 
