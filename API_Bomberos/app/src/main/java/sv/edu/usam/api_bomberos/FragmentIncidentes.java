@@ -3,17 +3,31 @@ package sv.edu.usam.api_bomberos;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentIncidentes#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import sv.edu.usam.api_bomberos.api.api;
+import sv.edu.usam.api_bomberos.models.Incidentes;
+import sv.edu.usam.api_bomberos.models.IncidentesRespuesta;
+
 public class FragmentIncidentes extends Fragment {
+
+    Retrofit retrofit;
+    private static final String TAG="Incid";
+    RecyclerView RvrecyclerView;
+    ListaIncidentesAdapter listaIncidentesAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,10 +63,56 @@ public class FragmentIncidentes extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+
+        RvrecyclerView = RvrecyclerView.findViewById(R.id.recyclerincidentes);
+        listaIncidentesAdapter= new ListaIncidentesAdapter(getContext());
+        RvrecyclerView.setAdapter(listaIncidentesAdapter);
+        RvrecyclerView.setHasFixedSize(true);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(),3);
+        RvrecyclerView.setLayoutManager(layoutManager);
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl("https://apibomberos.000webhostapp.com/datos/incidentes.php")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        obtenerListaIncidentes();
+
+
+
+
+
+        /*if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        }*/
+    }
+
+    private void obtenerListaIncidentes() {
+        api service = retrofit.create(api.class);
+        Call<IncidentesRespuesta> incidentesRespuestaCall =service.obtenerListaIncidentes();
+        incidentesRespuestaCall.enqueue(new Callback<IncidentesRespuesta>() {
+            @Override
+            public void onResponse(Call<IncidentesRespuesta> call, Response<IncidentesRespuesta> response) {
+                if(response.isSuccessful())
+                {
+                    IncidentesRespuesta incidentesRespuesta = response.body();
+                    ArrayList<Incidentes> incidentesLista = incidentesRespuesta.getResults();
+
+                    listaIncidentesAdapter.agregarListaIncidentes(incidentesLista);
+
+                }
+                else {
+                    Log.e(TAG," onResponse :" + response.errorBody());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<IncidentesRespuesta> call, Throwable t) {
+                Log.e(TAG," onFailure :"+ t.getMessage());
+            }
+        });
     }
 
     @Override
