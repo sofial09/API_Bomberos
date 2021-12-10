@@ -82,7 +82,7 @@ public class RegistroSesion extends AppCompatActivity {
 
         else{
             progressDialog.show();
-            StringRequest request = new StringRequest(Request.Method.POST, "https://login.corporacionefransac.com/insertar.php",
+            StringRequest request = new StringRequest(Request.Method.POST, "https://apibomberos.000webhostapp.com/datos/usuario.php?accion=insertar",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
