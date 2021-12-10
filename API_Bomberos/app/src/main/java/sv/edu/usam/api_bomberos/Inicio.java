@@ -12,10 +12,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Inicio extends AppCompatActivity {
 
-    Incidentes incidente = new Incidentes();
-    Perfil perfil = new Perfil();
-    Telefonos telefono = new Telefonos();
-    Salir salir = new Salir();
+    FragmentIncidentes incidente = new FragmentIncidentes();
+    FragmentPerfil perfil = new FragmentPerfil();
+    FragmentTelefonos telefono = new FragmentTelefonos();
+    FragmentSalir salir = new FragmentSalir();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

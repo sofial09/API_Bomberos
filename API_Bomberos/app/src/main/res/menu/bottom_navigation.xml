@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/telefonos"
-        android:icon="@android:drawable/stat_sys_phone_call"
+        android:icon="@drawable/telefono_icon"
         android:title="Teléfonos" />
 
     <item

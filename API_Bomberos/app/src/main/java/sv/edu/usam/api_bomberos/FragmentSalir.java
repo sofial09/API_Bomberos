@@ -1,5 +1,6 @@
 package sv.edu.usam.api_bomberos;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,13 +8,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Telefonos#newInstance} factory method to
+ * Use the {@link FragmentSalir#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Telefonos extends Fragment {
+public class FragmentSalir extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +27,10 @@ public class Telefonos extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Telefonos() {
+    View vista;
+    Button btnYes, btnNo;
+
+    public FragmentSalir() {
         // Required empty public constructor
     }
 
@@ -34,11 +40,11 @@ public class Telefonos extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Telefonos.
+     * @return A new instance of fragment Salir.
      */
     // TODO: Rename and change types and number of parameters
-    public static Telefonos newInstance(String param1, String param2) {
-        Telefonos fragment = new Telefonos();
+    public static FragmentSalir newInstance(String param1, String param2) {
+        FragmentSalir fragment = new FragmentSalir();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -58,7 +64,26 @@ public class Telefonos extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_telefonos, container, false);
+        vista = inflater.inflate(R.layout.fragment_salir, container, false);
+        btnYes = (Button) vista.findViewById(R.id.btnSi);
+        btnNo = (Button) vista.findViewById(R.id.btnNo);
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "NO QUIERO", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return vista;
     }
 }
