@@ -3,10 +3,20 @@ package sv.edu.usam.api_bomberos;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,9 +30,15 @@ public class Incidentes extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    RecyclerView recyclerView;
+    LinearLayoutManager layoutManager;
+    PostsAdapterIncidentes adapterIncidentes;
+    List<PostsIncidentes> incidentesList = new ArrayList<PostsIncidentes>();
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private List<PostsIncidentes> postsIncidentes;
 
     public Incidentes() {
         // Required empty public constructor
@@ -49,10 +65,38 @@ public class Incidentes extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+
+        recyclerView = recyclerView.findViewById(R.id.recyclerIncidentes);
+
+        layoutManager = new LinearLayoutManager(getContext());
+
+        recyclerView.setLayoutManager(layoutManager);
+        adapterIncidentes = new PostsAdapterIncidentes(postsIncidentes);
+        recyclerView.setAdapter(adapterIncidentes);
+
+        fetchPosts();
+
+        /*if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        }*/
+    }
+
+    private void fetchPosts() {
+        RetrofitClientIncidente.RetrofitClientIncidente().getPostIncidentes().enqueue(new Callback<List<PostsIncidentes>>() {
+            @Override
+            public void onResponse(Call<List<PostsIncidentes>> call, Response<List<PostsIncidentes>> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    incidentesList.addAll(response.body());
+                    adapterIncidentes.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PostsIncidentes>> call, Throwable t) {
+                //Toast.makeText(Incidentes.this, "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
