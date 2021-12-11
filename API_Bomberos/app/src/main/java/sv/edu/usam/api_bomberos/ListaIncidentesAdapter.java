@@ -35,7 +35,7 @@ public class ListaIncidentesAdapter extends RecyclerView.Adapter<ListaIncidentes
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListaIncidentesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Incidentes inc =dataset.get(position);
 
         holder.tvItipo.setText(inc.getTipo());
