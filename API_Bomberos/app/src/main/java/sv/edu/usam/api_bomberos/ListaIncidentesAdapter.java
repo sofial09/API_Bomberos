@@ -6,10 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.fragment.app.*;
-import android.support.*;
-import androidx.fragment.app.Fragment;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,10 +20,10 @@ import sv.edu.usam.api_bomberos.models.Incidentes;
 public class ListaIncidentesAdapter extends RecyclerView.Adapter<ListaIncidentesAdapter.ViewHolder> {
 
     private ArrayList<Incidentes> dataset;
-    Context context;
+    Context ccontext;
 
     public ListaIncidentesAdapter(Context context) {
-        this.context = context;
+        ccontext = context;
         dataset = new ArrayList<>();
     }
 
@@ -50,7 +46,7 @@ public class ListaIncidentesAdapter extends RecyclerView.Adapter<ListaIncidentes
         holder.tvIpersonaslesionadas.setText(inc.getPersonas_lesionadas());
         holder.tvIcosto.setText(inc.getCosto_danios());
 
-        Glide.with(context)
+        Glide.with(ccontext.getApplicationContext())
                 .load("https://apibomberos.000webhostapp.com/datos/incidentes.php?accion=listar")
                 .centerCrop()
                 .crossFade()
